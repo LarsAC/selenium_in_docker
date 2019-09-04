@@ -15,7 +15,9 @@ RUN wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/73
 RUN unzip /tmp/chromedriver.zip chromedriver -d /usr/local/bin/
 
 # install selenium
-RUN pip install selenium==3.141.0
+RUN pip install selenium==3.141.0 pytest
 
 WORKDIR /test
-CMD ["python3", "test.py"]
+COPY tests/ .
+# CMD ["python3", "test.py"]
+CMD ["pytest", "--junitxml=ui_test_report,xml"]
